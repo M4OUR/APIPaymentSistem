@@ -61,12 +61,16 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'postgres',  # Имя базы данных
-        'USER': 'postgres',  # Имя пользователя базы данных
+        'USER': 'postgres.ieejsaznddgcesrwwwvm',  # Имя пользователя
         'PASSWORD': 'qwer2233',  # Ваш пароль
-        'HOST': 'aws-0-eu-central-1.pooler.supabase.com',  # Адрес сервера (из строки подключения)
+        'HOST': 'aws-0-eu-central-1.pooler.supabase.com',  # Хост для Transaction Pooler
         'PORT': '6543',  # Порт для Transaction Pooler
+        'OPTIONS': {
+            'options': '-c search_path=public',  # Это опциональная настройка, можно оставить
+        }
     }
 }
+
 
 # Настройки Content Security Policy для Stripe
 CSP_DEFAULT_SRC = ("'self'",)
