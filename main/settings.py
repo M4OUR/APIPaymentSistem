@@ -60,13 +60,13 @@ WSGI_APPLICATION = 'main.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',  # Имя базы данных
-        'USER': 'postgres1.ieejsaznddgcesrwwwvm',  # Имя пользователя
-        'PASSWORD': 'qwer2233',  # Ваш пароль
-        'HOST': 'aws-0-eu-central-1.pooler.supabase.com',  # Хост для Transaction Pooler
-        'PORT': '6543',  # Порт для Transaction Pooler
+        'NAME': 'postgres',
+        'USER': 'postgres1.ieejsaznddgcesrwwwvm',
+        'PASSWORD': 'qwer2233',
+        'HOST': 'aws-0-eu-central-1.pooler.supabase.com',
+        'PORT': '5432',
         'OPTIONS': {
-            'options': '-c search_path=public',  # Это опциональная настройка, можно оставить
+            'sslmode': 'require',
         }
     }
 }
