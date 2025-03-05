@@ -59,8 +59,12 @@ WSGI_APPLICATION = 'main.wsgi.application'
 # Настройки базы данных
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(os.path.dirname(__file__), '..', 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'APIPayments',
+        'USER': 'admin_wild',
+        'PASSWORD': 'qwer2233',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
