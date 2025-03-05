@@ -63,8 +63,8 @@ DATABASES = {
         'NAME': 'APIPayments',
         'USER': 'postgres',
         'PASSWORD': 'qwer2233',
-        'HOST': 'db.ieejsaznddgcesrwwwvm.supabase.co',
-        'PORT': '5432',  
+        'HOST': 'aws-0-eu-central-1.pooler.supabase.com',
+        'PORT': '5432',
     }
 }
 
