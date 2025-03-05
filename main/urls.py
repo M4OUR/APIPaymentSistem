@@ -8,5 +8,5 @@ def home(request):
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home, name='home'),
-    path('', include('payments.urls')),
+    path('payments/', include('payments.urls')), 
 ]
