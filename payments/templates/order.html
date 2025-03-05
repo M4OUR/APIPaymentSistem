@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Оплата заказа</title>
+    <script src="https://js.stripe.com/v3/"></script>
+    <meta name="csrf-token" content="{{ csrf_token }}">
+</head>
+<body>
+    <h1>Заказ №{{ order.id }}</h1>
+    <p>Сумма: {{ order.total_price }} {{ order.currency }}</p>
+
+    <form id="payment-form">
+        <div id="card-element"></div>
+        <button id="pay-button" type="submit">Оплатить</button>
+    </form>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+        const stripe = Stripe("{{ stripe_public_key }}");
+        const elements = stripe.elements();
+        const cardElement = elements.create("card");
+        cardElement.mount("#card-element");
+
+        const form = document.getElementById("payment-form");
+        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+        const orderId = "{{ order.id }}";
+
+        form.addEventListener("submit", async function (event) {
+            event.preventDefault();
+
+            try {
+                // Запрос на сервер для создания PaymentIntent
+                const response = await fetch(`/buy/order/${orderId}/create_payment_intent/`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRFToken": csrfToken,
+                    },
+                });
+
+                const data = await response.json();
+                if (!data.clientSecret) {
+                    throw new Error("Ошибка: clientSecret не получен!");
+                }
+
+                console.log("Получен clientSecret:", data.clientSecret);
+
+                // Подтверждение платежа через Stripe
+                const { error, paymentIntent } = await stripe.confirmCardPayment(data.clientSecret, {
+                    payment_method: {
+                        card: cardElement,
+                        billing_details: {
+                            address: { postal_code: '' }
+                        }
+                    }
+                });
+
+                if (error) {
+                    console.error("Ошибка при подтверждении платежа:", error.message);
+                    alert("Ошибка при подтверждении платежа: " + error.message);
+                } else if (paymentIntent.status === "succeeded") {
+                    console.log("Заказ успешно оплачен!");
+                    window.location.href = "/success/";
+                }
+            } catch (error) {
+                console.error("Ошибка сети или обработки платежа:", error);
+                alert("Ошибка: " + error.message);
+            }
+        });
+    });
+    </script>
+</body>
+</html>
