@@ -61,10 +61,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'APIPayments',
-        'USER': 'admin_wild',
+        'USER': 'postgres',
         'PASSWORD': 'qwer2233',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'HOST': 'db.ieejsaznddgcesrwwwvm.supabase.co',
+        'PORT': '5432',  
     }
 }
 
