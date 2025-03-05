@@ -3,10 +3,10 @@ from django.urls import path, include
 from django.http import HttpResponse
 
 def home(request):
-    return HttpResponse("API Payment System: Главная страница работает!")
+    return HttpResponse('/admin/')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home, name='home'),
-    path('payments/', include('payments.urls')), 
+    path('payments/', include('payments.urls')),
 ]
