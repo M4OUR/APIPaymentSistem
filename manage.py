@@ -10,7 +10,7 @@ load_dotenv(os.path.join(os.path.dirname(__file__), '.env'))
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'main.settings')
 
 # Точка входа для Vercel
-application = get_wsgi_application()  # Применяем переменную `application`
+app = get_wsgi_application()  # Применяем переменную `application`
 
 
 def main():
