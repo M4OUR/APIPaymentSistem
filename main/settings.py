@@ -60,7 +60,7 @@ WSGI_APPLICATION = 'main.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres1',  # Имя базы данных
+        'NAME': 'postgres',  # Имя базы данных
         'USER': 'postgres1.ieejsaznddgcesrwwwvm',  # Имя пользователя
         'PASSWORD': 'qwer2233',  # Ваш пароль
         'HOST': 'aws-0-eu-central-1.pooler.supabase.com',  # Хост для Transaction Pooler
